@@ -10,7 +10,7 @@ interface AuthContextType {
   workspaces: Workspace[];
   sharedSnippets: SharedSnippet[];
   auditLogs: AuditLog[];
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: (credential: string) => Promise<void>;
   signInWithEmail: (email: string, pass: string) => Promise<void>;
   signUpWithEmail: (email: string, pass: string, displayName: string) => Promise<void>;
   updateUserProfile: (updates: Partial<UserProfile>) => Promise<boolean>;
@@ -124,15 +124,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // 4. Google Login Fallback
-  const loginWithGoogle = async () => {
-    // Standard prompt directing to self-contained account creation
-    const email = prompt("Enter your Google Account email to continue:")?.trim().toLowerCase();
-    if (!email) return;
-    try {
-      await signInWithEmail(email, "GoogleAuth123!");
-    } catch {
-      await signUpWithEmail(email, "GoogleAuth123!", email.split("@")[0]);
+  // 4. Google Login with credential
+  const loginWithGoogle = async (credential: string) => {
+    const data = await api.loginWithGoogle(credential);
+    const u: User = {
+      uid: data.user.userId,
+      email: data.user.email,
+      displayName: data.user.displayName,
+      photoURL: data.user.photoURL,
+    };
+    setUser(u);
+    setProfile(data.user);
+    setActiveWorkspace(data.workspace);
+    setWorkspaces(data.workspaces || [data.workspace]);
+
+    if (data.workspace) {
+      loadWorkspaceData(data.workspace.id);
     }
   };
 

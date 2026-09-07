@@ -59,6 +59,15 @@ export const api = {
     return data;
   },
 
+  async loginWithGoogle(credential: string): Promise<{ token: string; user: UserProfile; workspace: Workspace; workspaces: Workspace[] }> {
+    const data = await fetchApi<{ token: string; user: UserProfile; workspace: Workspace; workspaces: Workspace[] }>("/api/auth/google", {
+      method: "POST",
+      body: JSON.stringify({ credential }),
+    });
+    setStoredToken(data.token);
+    return data;
+  },
+
   async getMe(): Promise<{ user: UserProfile; workspaces: Workspace[]; activeWorkspace: Workspace | null }> {
     return fetchApi<{ user: UserProfile; workspaces: Workspace[]; activeWorkspace: Workspace | null }>("/api/auth/me");
   },
