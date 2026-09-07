@@ -19,6 +19,8 @@ local.db*
 *.db-shm
 *.sqlite
 *.sqlite3
+data/*
+!data/.gitkeep
 
 # ==========================================
 # 3. Agent & Spec-Kit Development Methodology

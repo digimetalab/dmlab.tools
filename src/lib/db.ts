@@ -1,5 +1,7 @@
 import { createClient, type Client } from "@libsql/client";
 import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
 
 dotenv.config();
 
@@ -27,8 +29,12 @@ export function getDatabaseConfig(): { url: string; authToken?: string; isLocal:
     };
   }
 
-  // Local SQLite (file:local.db)
-  const localUrl = process.env.LOCAL_DATABASE_URL || (process.env.DATABASE_URL?.startsWith("file:") ? process.env.DATABASE_URL : "file:local.db");
+  // Local SQLite (file:data/local.db)
+  let localUrl = process.env.LOCAL_DATABASE_URL || (process.env.DATABASE_URL?.startsWith("file:") ? process.env.DATABASE_URL : "file:data/local.db");
+  if (localUrl === "file:local.db" && !fs.existsSync(path.resolve(process.cwd(), "local.db")) && fs.existsSync(path.resolve(process.cwd(), "data/local.db"))) {
+    localUrl = "file:data/local.db";
+  }
+
   return {
     url: localUrl,
     authToken: undefined,
@@ -42,6 +48,13 @@ let dbClient: Client | null = null;
 export function getDb(): Client {
   if (!dbClient) {
     const config = getDatabaseConfig();
+    if (config.url.startsWith("file:")) {
+      const filePath = config.url.replace(/^file:/, "");
+      const dir = path.dirname(path.resolve(process.cwd(), filePath));
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+    }
     dbClient = createClient({
       url: config.url,
       authToken: config.authToken,

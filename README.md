@@ -108,7 +108,7 @@ Isi konfigurasi lokal:
 ```env
 GROQ_API_KEY=gsk_your_groq_api_key_here
 GROQ_MODEL=llama-3.3-70b-versatile
-DATABASE_URL=file:local.db
+DATABASE_URL=file:data/local.db
 JWT_SECRET=your_secure_random_jwt_secret_key
 PORT=3000
 ```
@@ -117,7 +117,7 @@ PORT=3000
 ```bash
 npm run dev
 ```
-Aplikasi akan otomatis menginisialisasi skema database SQLite di `local.db` dan berjalan di `http://localhost:3000`.
+Aplikasi akan otomatis menginisialisasi skema database SQLite di folder `data/local.db` dan berjalan di `http://localhost:3000`.
 
 ---
 
