@@ -250,13 +250,13 @@ export function AuthModal({ isOpen, onClose, initialTab = 'signin' }: AuthModalP
                 <div className="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 text-[11px] text-amber-800 dark:text-amber-200 leading-relaxed space-y-1.5 animate-in fade-in">
                   <div className="flex items-center gap-1.5 font-bold text-amber-900 dark:text-amber-100">
                     <Info className="w-3.5 h-3.5 shrink-0" />
-                    <span>Google Client ID Belum Dikonfigurasi</span>
+                    <span>Google Client ID Not Configured</span>
                   </div>
                   <p>
-                    Tambahkan <code className="px-1 py-0.5 rounded bg-amber-200/60 dark:bg-amber-900/60 font-mono text-[10px]">VITE_GOOGLE_CLIENT_ID</code> di file <code className="px-1 py-0.5 rounded bg-amber-200/60 dark:bg-amber-900/60 font-mono text-[10px]">.env</code> dari Google Cloud Console.
+                    Add <code className="px-1 py-0.5 rounded bg-amber-200/60 dark:bg-amber-900/60 font-mono text-[10px]">VITE_GOOGLE_CLIENT_ID</code> in your <code className="px-1 py-0.5 rounded bg-amber-200/60 dark:bg-amber-900/60 font-mono text-[10px]">.env</code> file from Google Cloud Console.
                   </p>
                   <p className="text-[10px] text-amber-700 dark:text-amber-300">
-                    Sementara itu, Anda dapat mendaftar atau masuk menggunakan <strong>Email & Password</strong> di bawah.
+                    In the meantime, you can sign up or sign in using <strong>Email & Password</strong> below.
                   </p>
                 </div>
               )}
