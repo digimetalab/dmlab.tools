@@ -1,0 +1,332 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-base: #F5F5F7;
+    --text-primary: #1D1D1F;
+    --text-muted: #6E6E73;
+    --accent: #6C63FF;
+    --accent-light: #8B84FF;
+    --accent-teal: #38B2AC;
+  }
+
+  body {
+    background-color: #F5F5F7;
+    color: #1D1D1F;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    selection-background-color: #6C63FF;
+    selection-color: #FFFFFF;
+  }
+
+  .dark body,
+  html.dark body {
+    background-color: #1E1E1E;
+    color: #F5F5F7;
+  }
+
+  .font-display {
+    font-family: 'Plus Jakarta Sans', 'DM Sans', sans-serif;
+  }
+
+  /* Universal Neumorphic Input & Textarea defaults */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="range"]):not([type="file"]),
+  textarea,
+  select {
+    background-color: #EDEDF0;
+    color: #1D1D1F;
+    box-shadow: inset 3px 3px 6px rgba(160, 165, 175, 0.45), inset -3px -3px 6px rgba(255, 255, 255, 0.95);
+    border: none;
+    outline: none;
+    transition: all 200ms ease;
+  }
+
+  .dark input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="range"]):not([type="file"]),
+  .dark textarea,
+  .dark select {
+    background-color: #161618;
+    color: #F5F5F7;
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.75), inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #8E8E93;
+    opacity: 0.9;
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: #8E8E93;
+    opacity: 0.8;
+  }
+
+  /* Code Block styling with high-contrast legibility */
+  pre {
+    background-color: #EDEDF0;
+    color: #1D1D1F;
+    box-shadow: inset 4px 4px 8px rgba(160, 165, 175, 0.45), inset -4px -4px 8px rgba(255, 255, 255, 0.95);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    border: none;
+  }
+
+  .dark pre {
+    background-color: #161618;
+    color: #F5F5F7;
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.75), inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* ---------------------------------------------------- */
+/* NEUMORPHIC SHADOW PHYSICS & UTILITIES (LIGHT & DARK) */
+/* ---------------------------------------------------- */
+
+/* Extruded (Standard Raised Card/Button) */
+.neu-flat,
+.neu-convex {
+  background-color: #F5F5F7;
+  box-shadow: 8px 8px 16px rgba(165, 170, 180, 0.35), -8px -8px 16px rgba(255, 255, 255, 0.95);
+  border: none !important;
+}
+
+.dark .neu-flat,
+.dark .neu-convex {
+  background-color: #28282A;
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.65), -8px -8px 18px rgba(255, 255, 255, 0.05);
+}
+
+/* Extruded Hover (Lifted State) */
+.neu-convex-hover {
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.neu-convex-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 10px 10px 20px rgba(165, 170, 180, 0.42), -10px -10px 20px rgba(255, 255, 255, 1);
+}
+.dark .neu-convex-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 10px 10px 22px rgba(0, 0, 0, 0.75), -10px -10px 22px rgba(255, 255, 255, 0.08);
+}
+
+/* Extruded Small (Buttons, Badges, Tabs) */
+.neu-convex-sm {
+  background-color: #F5F5F7;
+  box-shadow: 4px 4px 8px rgba(165, 170, 180, 0.35), -4px -4px 8px rgba(255, 255, 255, 0.95);
+  border: none !important;
+}
+.dark .neu-convex-sm {
+  background-color: #28282A;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6), -5px -5px 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Extruded Extra Small */
+.neu-convex-xs {
+  background-color: #F5F5F7;
+  box-shadow: 2px 2px 5px rgba(165, 170, 180, 0.35), -2px -2px 5px rgba(255, 255, 255, 0.95);
+  border: none !important;
+}
+.dark .neu-convex-xs {
+  background-color: #28282A;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.55), -3px -3px 6px rgba(255, 255, 255, 0.05);
+}
+
+/* Inset (Standard Pressed / Shallow Well) */
+.neu-pressed {
+  background-color: #EDEDF0;
+  box-shadow: inset 4px 4px 8px rgba(160, 165, 175, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.95);
+  border: none !important;
+}
+.dark .neu-pressed {
+  background-color: #1E1E20;
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.7), inset -5px -5px 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Inset Deep (Inputs, Active Icon Wells, Carved Containers) */
+.neu-pressed-deep,
+.neu-input {
+  background-color: #EDEDF0;
+  box-shadow: inset 6px 6px 12px rgba(160, 165, 175, 0.48), inset -6px -6px 12px rgba(255, 255, 255, 0.95);
+  border: none !important;
+}
+.dark .neu-pressed-deep,
+.dark .neu-input {
+  background-color: #161618;
+  box-shadow: inset 7px 7px 14px rgba(0, 0, 0, 0.8), inset -7px -7px 14px rgba(255, 255, 255, 0.06);
+}
+
+/* Inset Small (Subtle tracks, pills, tags) */
+.neu-pressed-sm {
+  background-color: #EDEDF0;
+  box-shadow: inset 2px 2px 5px rgba(160, 165, 175, 0.38), inset -2px -2px 5px rgba(255, 255, 255, 0.95);
+  border: none !important;
+}
+.dark .neu-pressed-sm {
+  background-color: #161618;
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.7), inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+}
+
+/* Primary Neumorphic Action Button (Molded Tactile Accent) */
+.neu-btn-primary {
+  background-color: #6C63FF;
+  color: #FFFFFF;
+  box-shadow: 4px 4px 10px rgba(165, 170, 180, 0.4), -4px -4px 10px rgba(255, 255, 255, 0.9);
+  border: none !important;
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dark .neu-btn-primary {
+  background-color: #6C63FF;
+  box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.65), -5px -5px 12px rgba(255, 255, 255, 0.06);
+}
+.neu-btn-primary:hover {
+  background-color: #5d53f5;
+  transform: translateY(-1px);
+  box-shadow: 6px 6px 14px rgba(165, 170, 180, 0.5), -6px -6px 14px rgba(255, 255, 255, 1);
+}
+.dark .neu-btn-primary:hover {
+  background-color: #7B73FF;
+  box-shadow: 7px 7px 16px rgba(0, 0, 0, 0.75), -7px -7px 16px rgba(255, 255, 255, 0.09);
+}
+.neu-btn-primary:active {
+  transform: translateY(0.5px);
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.35), inset -4px -4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Secondary Neumorphic Soft Clay Button */
+.neu-btn-secondary {
+  background-color: #F5F5F7;
+  color: #1D1D1F;
+  box-shadow: 4px 4px 8px rgba(165, 170, 180, 0.35), -4px -4px 8px rgba(255, 255, 255, 0.95);
+  border: none !important;
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dark .neu-btn-secondary {
+  background-color: #28282A;
+  color: #F5F5F7;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6), -5px -5px 10px rgba(255, 255, 255, 0.05);
+}
+.neu-btn-secondary:hover {
+  color: #6C63FF;
+  transform: translateY(-1px);
+  box-shadow: 6px 6px 12px rgba(165, 170, 180, 0.42), -6px -6px 12px rgba(255, 255, 255, 1);
+}
+.dark .neu-btn-secondary:hover {
+  color: #8B84FF;
+  box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.75), -7px -7px 14px rgba(255, 255, 255, 0.08);
+}
+.neu-btn-secondary:active {
+  transform: translateY(0.5px);
+  box-shadow: inset 4px 4px 8px rgba(160, 165, 175, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.95);
+}
+.dark .neu-btn-secondary:active {
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.7), inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+}
+
+/* Soft Clay Accent Button (Theme Harmonious) */
+.neu-btn-accent {
+  background-color: #F5F5F7;
+  color: #6C63FF;
+  box-shadow: 4px 4px 8px rgba(165, 170, 180, 0.35), -4px -4px 8px rgba(255, 255, 255, 0.95);
+  border: none !important;
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dark .neu-btn-accent {
+  background-color: #28282A;
+  color: #8B84FF;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6), -5px -5px 10px rgba(255, 255, 255, 0.05);
+}
+.neu-btn-accent:hover {
+  color: #5548f0;
+  transform: translateY(-1px);
+  box-shadow: 6px 6px 12px rgba(165, 170, 180, 0.42), -6px -6px 12px rgba(255, 255, 255, 1);
+}
+.dark .neu-btn-accent:hover {
+  color: #a5a0ff;
+  box-shadow: 7px 7px 14px rgba(0, 0, 0, 0.75), -7px -7px 14px rgba(255, 255, 255, 0.08);
+}
+.neu-btn-accent:active {
+  transform: translateY(0.5px);
+  box-shadow: inset 4px 4px 8px rgba(160, 165, 175, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.95);
+}
+.dark .neu-btn-accent:active {
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.7), inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+}
+
+/* Active Toggle Tab (Pushed down state) */
+.neu-tab-active {
+  background-color: #EDEDF0;
+  color: #6C63FF;
+  box-shadow: inset 3px 3px 6px rgba(160, 165, 175, 0.45), inset -3px -3px 6px rgba(255, 255, 255, 0.95);
+}
+.dark .neu-tab-active {
+  background-color: #161618;
+  color: #8B84FF;
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.75), inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+}
+
+/* Focus Rings with soft Neumorphic offset */
+input:focus,
+button:focus-visible,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: inset 6px 6px 12px rgba(160, 165, 175, 0.48), inset -6px -6px 12px rgba(255, 255, 255, 0.95), 0 0 0 2px #6C63FF;
+}
+
+/* Ambient Float Animation */
+@keyframes neu-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes neu-pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+.animate-neu-float {
+  animation: neu-float 4s ease-in-out infinite;
+}
+
+.animate-neu-float-delayed {
+  animation: neu-float 5s ease-in-out 1.5s infinite;
+}
+
+/* Custom Neumorphic Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F5F7;
+  box-shadow: inset 2px 2px 4px rgba(160, 165, 175, 0.3), inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #161618;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.75), inset -2px -2px 4px rgba(255, 255, 255, 0.04);
+}
+::-webkit-scrollbar-thumb {
+  background: #C7C7CC;
+  box-shadow: 2px 2px 4px rgba(165, 170, 180, 0.35);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #3A3A3C;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6C63FF;
+}

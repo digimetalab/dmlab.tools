@@ -1,0 +1,7 @@
+{
+  "name": "DMLab Tools",
+  "description": "Unified Marketplace for AI Agent Skills (SKILL.md), Design Systems (DESIGN.md), Model Context Protocol (MCP) servers, and 67+ tactile developer tools with collaborative team workspaces.",
+
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
