@@ -12,9 +12,15 @@ export const app = express();
 
 app.use(express.json({ limit: "10mb" }));
 
-// Initialize database schema on startup/first load
-initDatabase().catch((err) => {
-  console.error("Failed to initialize database on app load:", err);
+// Ensure database schema is initialized before handling any requests (critical for serverless cold-starts)
+app.use(async (req, res, next) => {
+  try {
+    await initDatabase();
+    next();
+  } catch (err) {
+    console.error("Database readiness middleware error:", err);
+    next(err);
+  }
 });
 
 // Health check endpoint
